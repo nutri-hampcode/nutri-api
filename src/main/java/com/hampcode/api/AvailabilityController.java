@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -26,6 +27,15 @@ public class AvailabilityController {
     public ResponseEntity<Availability> findById(@PathVariable Integer id) {
         Availability availability = availabilityService.findById(id);
         return new ResponseEntity<>(availability, HttpStatus.OK);
+    }
+
+    @GetMapping("/doctor/{id_doctor}")
+    public ResponseEntity<List<Availability>> findAllByDoctor(@PathVariable Integer id_doctor) {
+        List<Availability> availability = availabilityService.findDoctorAvailability(id_doctor);
+        List<Availability> availables = availability.stream()
+                .filter(avail -> !avail.getReserved())
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(availables, HttpStatus.OK);
     }
 
     @PostMapping("/{id_doctor}")
