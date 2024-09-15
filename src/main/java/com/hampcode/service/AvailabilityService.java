@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface AvailabilityService {
     List<Availability> findAll();
+    List<Availability> findDoctorAvailability(Integer id_doctor);
     Availability findById(Integer id);
     Availability create(Integer id_doctor, Availability availability);
     Availability update(Integer id, Availability availability);

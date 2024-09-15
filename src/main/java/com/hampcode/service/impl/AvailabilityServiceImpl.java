@@ -10,6 +10,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,6 +23,13 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     @Override
     public List<Availability> findAll() {
         return availabilityRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Availability> findDoctorAvailability(Integer id_doctor){
+        return availabilityRepository.findByDoctor(id_doctor)
+                .orElseThrow(()-> new RuntimeException("Availabilities not found for Doctor with id: "+id_doctor));
     }
 
     @Transactional(readOnly = true)
