@@ -1,5 +1,9 @@
 package com.hampcode.service.impl;
 
+import com.hampcode.dto.AvailabilityCreateUpdateDTO;
+import com.hampcode.dto.AvailabilityDetailsDTO;
+import com.hampcode.exception.ResourceNotFoundException;
+import com.hampcode.mapper.AvailabilityMapper;
 import com.hampcode.model.entity.Availability;
 import com.hampcode.model.entity.Doctor;
 import com.hampcode.repository.AvailabilityRepository;
@@ -18,49 +22,59 @@ import java.util.List;
 public class AvailabilityServiceImpl implements AvailabilityService {
     private final AvailabilityRepository availabilityRepository;
     private final DoctorRepository doctorRepository;
+    private final AvailabilityMapper availabilityMapper;
 
     @Transactional(readOnly = true)
     @Override
-    public List<Availability> findAll() {
-        return availabilityRepository.findAll();
+    public List<AvailabilityDetailsDTO> findAll() {
+        List<Availability> avs = availabilityRepository.findAll();
+        return avs.stream()
+                .map(availabilityMapper::toDetailsDTO).toList();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<Availability> findDoctorAvailability(Integer id_doctor){
-        return availabilityRepository.findByDoctor(id_doctor)
-                .orElseThrow(()-> new RuntimeException("Availabilities not found for Doctor with id: "+id_doctor));
+    public List<AvailabilityDetailsDTO> findDoctorAvailability(Integer id_doctor){
+        List<Availability> avs = availabilityRepository.findByDoctor(id_doctor)
+                .orElseThrow(()-> new ResourceNotFoundException("Availabilities not found for Doctor with id: "+id_doctor));
+        return avs.stream()
+                .map(availabilityMapper::toDetailsDTO).toList();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Availability findById(Integer id) {
-        return availabilityRepository
-                .findById(id).orElseThrow(()-> new RuntimeException("Availability not found with id: " + id));
+    public AvailabilityDetailsDTO findById(Integer id) {
+        Availability av = availabilityRepository
+                .findById(id).orElseThrow(()-> new ResourceNotFoundException("Availability not found with id: " + id));
+        return availabilityMapper.toDetailsDTO(av);
     }
 
     @Transactional
     @Override
-    public Availability create(Integer id_doctor, Availability availability) {
-        Doctor doc = doctorRepository.findById(id_doctor).orElseThrow(()-> new RuntimeException("Doctor not found with id: " + id_doctor));
-        availability.setDoctor(doc);
-        return availabilityRepository.save(availability);
+    public AvailabilityDetailsDTO create(Integer id_doctor, AvailabilityCreateUpdateDTO availabilityCreateDTO) {
+        Doctor doc = doctorRepository.findById(id_doctor).orElseThrow(()-> new ResourceNotFoundException("Doctor not found with id: " + id_doctor));
+        Availability av = availabilityMapper.toEntity(availabilityCreateDTO);
+        av.setDoctor(doc);
+        return availabilityMapper.toDetailsDTO(availabilityRepository.save(av));
     }
 
     @Transactional
     @Override
-    public Availability update(Integer id, Availability availability) {
+    public AvailabilityDetailsDTO update(Integer id, AvailabilityCreateUpdateDTO availabilityUpdateDTO) {
         Availability aux = availabilityRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Availability not found with id: " + id));
-        aux.setTime(availability.getTime());
-        aux.setDate(availability.getDate());
-        aux.setReserved(availability.getReserved());
-        return availabilityRepository.save(aux);
+                .orElseThrow(()->new ResourceNotFoundException("Availability not found with id: " + id));
+
+        aux.setTime(availabilityUpdateDTO.getTime());
+        aux.setDate(availabilityUpdateDTO.getDate());
+        aux.setReserved(availabilityUpdateDTO.getReserved());
+        return availabilityMapper.toDetailsDTO(availabilityRepository.save(aux));
     }
 
     @Transactional
     @Override
     public void delete(Integer id) {
-        availabilityRepository.deleteById(id);
+        Availability av = availabilityRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Availability not found with id: " + id));
+        availabilityRepository.delete(av);
     }
 }
