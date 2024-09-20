@@ -11,9 +11,9 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="first_name", nullable = false)
-    private String first_name;
+    @Column(name="firstName", nullable = false)
+    private String firstName;
 
-    @Column(name="last_name", nullable = false)
-    private String last_name;
+    @Column(name="lastName", nullable = false)
+    private String lastName;
 }
