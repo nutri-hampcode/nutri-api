@@ -1,8 +1,11 @@
 package com.hampcode.api;
 
+import com.hampcode.dto.AvailabilityCreateUpdateDTO;
+import com.hampcode.dto.AvailabilityDetailsDTO;
 import com.hampcode.model.entity.Availability;
 import com.hampcode.model.entity.Doctor;
 import com.hampcode.service.AvailabilityService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,35 +21,35 @@ public class AvailabilityController {
     private final AvailabilityService availabilityService;
 
     @GetMapping
-    public ResponseEntity<List<Availability>> findAll() {
-        List<Availability> availability = availabilityService.findAll();
+    public ResponseEntity<List<AvailabilityDetailsDTO>> findAll() {
+        List<AvailabilityDetailsDTO> availability = availabilityService.findAll();
         return new ResponseEntity<>(availability, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Availability> findById(@PathVariable Integer id) {
-        Availability availability = availabilityService.findById(id);
+    public ResponseEntity<AvailabilityDetailsDTO> findById(@PathVariable Integer id) {
+        AvailabilityDetailsDTO availability = availabilityService.findById(id);
         return new ResponseEntity<>(availability, HttpStatus.OK);
     }
 
     @GetMapping("/doctor/{id_doctor}")
-    public ResponseEntity<List<Availability>> findAllByDoctor(@PathVariable Integer id_doctor) {
-        List<Availability> availability = availabilityService.findDoctorAvailability(id_doctor);
-        List<Availability> availables = availability.stream()
+    public ResponseEntity<List<AvailabilityDetailsDTO>> findAllByDoctor(@PathVariable Integer id_doctor) {
+        List<AvailabilityDetailsDTO> availability = availabilityService.findDoctorAvailability(id_doctor);
+        List<AvailabilityDetailsDTO> availables = availability.stream()
                 .filter(avail -> !avail.getReserved())
                 .collect(Collectors.toList());
         return new ResponseEntity<>(availables, HttpStatus.OK);
     }
 
     @PostMapping("/{id_doctor}")
-    public ResponseEntity<Availability> create(@PathVariable Integer id_doctor,@RequestBody Availability availability) {
-        Availability aux = availabilityService.create(id_doctor, availability);
+    public ResponseEntity<AvailabilityDetailsDTO> create(@PathVariable Integer id_doctor, @Valid @RequestBody AvailabilityCreateUpdateDTO availabilityCreateDTO) {
+        AvailabilityDetailsDTO aux = availabilityService.create(id_doctor, availabilityCreateDTO);
         return new ResponseEntity<>(aux, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Availability> update(@PathVariable Integer id, @RequestBody Availability availability) {
-        Availability aux = availabilityService.update(id, availability);
+    public ResponseEntity<AvailabilityDetailsDTO> update(@PathVariable Integer id,@Valid @RequestBody AvailabilityCreateUpdateDTO availabilityUpdateDTO) {
+        AvailabilityDetailsDTO aux = availabilityService.update(id, availabilityUpdateDTO);
         return new ResponseEntity<>(aux, HttpStatus.OK);
     }
 
