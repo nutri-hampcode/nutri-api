@@ -7,12 +7,10 @@ import com.hampcode.mapper.DoctorMapper;
 import com.hampcode.model.entity.Doctor;
 import com.hampcode.repository.DoctorRepository;
 import com.hampcode.service.DoctorService;
-import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.print.Doc;
 import java.util.List;
 
 @RequiredArgsConstructor
