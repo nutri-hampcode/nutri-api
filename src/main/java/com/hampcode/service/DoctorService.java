@@ -1,13 +1,13 @@
 package com.hampcode.service;
 
-import com.hampcode.model.entity.Doctor;
+import com.hampcode.dto.DoctorDTO;
 
 import java.util.List;
 
 public interface DoctorService {
-    List<Doctor> findAll();
-    Doctor getOne(Integer id);
-    Doctor create(Doctor doctor);
-    Doctor update(Integer id, Doctor doctor);
+    List<DoctorDTO> findAll();
+    DoctorDTO getOne(Integer id);
+    DoctorDTO create(DoctorDTO doctor);
+    DoctorDTO update(Integer id, DoctorDTO doctor);
     void delete(Integer id);
 }
