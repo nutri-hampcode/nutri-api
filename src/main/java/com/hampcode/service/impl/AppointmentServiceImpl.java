@@ -12,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
+
     private final AppointmentRepository appointmentRepository;
 
     @Override
@@ -23,7 +24,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     @Transactional(readOnly = true)
     public Appointment getOne(Integer id) {
-        return appointmentRepository.findById(id)
+        return appointmentRepository.findById(Long.valueOf(id))
                 .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + id));
     }
 
@@ -46,6 +47,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     @Transactional
     public void delete(Integer id) {
-        appointmentRepository.deleteById(id);
+        Appointment existingAppointment = getOne(id);
+        appointmentRepository.delete(existingAppointment);
     }
+
+
 }
