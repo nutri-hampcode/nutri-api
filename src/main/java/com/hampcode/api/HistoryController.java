@@ -1,6 +1,5 @@
 package com.hampcode.api;
 
-import com.hampcode.model.entity.Appointment;
 import com.hampcode.model.entity.History;
 import com.hampcode.service.HistoryService;
 import lombok.RequiredArgsConstructor;

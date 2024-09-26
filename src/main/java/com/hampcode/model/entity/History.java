@@ -5,9 +5,9 @@ import lombok.Data;
 
 import java.util.List;
 
-
 @Entity
 @Data
+@Table(name = "histories")
 public class History {
 
     @Id
