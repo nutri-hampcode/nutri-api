@@ -1,5 +1,8 @@
 package com.hampcode.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,18 +17,8 @@ public class History {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String reason;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "history_id")
+    @JsonManagedReference
     private List<Appointment> appointments;
-
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
-
-//    @ManyToOne
-//    @JoinColumn(name = "availability_id", nullable = false)
-//    private Availability availability;
-
 }

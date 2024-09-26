@@ -1,5 +1,7 @@
 package com.hampcode.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,8 +17,12 @@ public class Appointment {
 
     private String reason;
 
-//    @ManyToOne
-//    @JoinColumn(name = "availability_id", nullable = false)
-//    private Availability availability;
+    @OneToOne
+    @JoinColumn(name = "availability_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_id_availability"))
+    private Availability availability;
 
+    @ManyToOne
+    @JoinColumn(name = "history_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_id_history"))
+    @JsonBackReference
+    private History history;
 }

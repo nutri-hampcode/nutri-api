@@ -33,11 +33,6 @@ public class HistoryController {
         return new ResponseEntity<>(a, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<History> update(@PathVariable Integer id, @RequestBody History history){
-        History a = historyService.update(id, history);
-        return new ResponseEntity<>(a, HttpStatus.OK);
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<History> delete(@PathVariable Integer id){

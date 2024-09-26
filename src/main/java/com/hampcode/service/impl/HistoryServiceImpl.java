@@ -33,15 +33,6 @@ public class HistoryServiceImpl implements HistoryService {
         return historyRepository.save(history);
     }
 
-    @Override
-    @Transactional
-    public History update(Integer id, History history) {
-        History existingHistory = getOne(id);
-        // Update fields as necessary
-        existingHistory.setReason(history.getReason());
-        // Update other fields as needed
-        return historyRepository.save(existingHistory);
-    }
 
     @Override
     @Transactional
