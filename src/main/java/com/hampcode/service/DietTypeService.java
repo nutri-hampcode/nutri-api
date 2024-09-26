@@ -1,13 +1,13 @@
 package com.hampcode.service;
 
-import com.hampcode.model.entity.DietType;
+import com.hampcode.dto.DietTypeDTO;
 
 import java.util.List;
 
 public interface DietTypeService {
-    List<DietType> findAll();
-    DietType getOne(Integer id);
-    DietType create(DietType dietType);
-    DietType update(Integer id, DietType dietType);
+    List<DietTypeDTO> findAll();
+    DietTypeDTO getOne(Integer id);
+    DietTypeDTO create(DietTypeDTO dietTypeDTO);
+    DietTypeDTO update(Integer id, DietTypeDTO dietTypeDTO);
     void delete(Integer id);
 }

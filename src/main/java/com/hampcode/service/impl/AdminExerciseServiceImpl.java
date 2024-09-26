@@ -1,4 +1,4 @@
-package com.hampcode.controller;
+package com.hampcode.service.impl;
 
 import com.hampcode.model.entity.Exercise;
 import com.hampcode.repository.ExerciseRepository;

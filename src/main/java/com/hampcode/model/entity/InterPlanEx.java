@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 
-
-
 @Data
 @Entity
 @Table(name = "inter_plan_ex")
