@@ -39,30 +39,17 @@ public class MealController {
         return ResponseEntity.ok(savedMeal);
     }
 
+    // Actualizar un alimento existente utilizando MealDTO
     @PutMapping("/{id}")
-    public ResponseEntity<Meal> updateMeal(@PathVariable Integer id, @RequestBody Meal mealDetails) {
-        Meal existingMeal = mealService.findMealById(id);
-        if (existingMeal == null) {
-            return ResponseEntity.notFound().build();
-        }
-        // Supone que existen métodos setters para actualizar los campos deseados
-        existingMeal.setName(mealDetails.getName());
-        existingMeal.setDescription(mealDetails.getDescription());
-        existingMeal.setProteins(mealDetails.getProteins());
-        existingMeal.setCarbs(mealDetails.getCarbs());
-        existingMeal.setFat(mealDetails.getFat());
-        Meal updatedMeal = mealService.saveMeal(existingMeal);
-        return ResponseEntity.ok(updatedMeal);
+    public ResponseEntity<MealDTO> updateMeal(@PathVariable Integer id, @Valid @RequestBody MealDTO mealDto) {
+        Meal updatedMeal = mealService.updateMeal(id, mealDto); // Usa el método del servicio
+        return ResponseEntity.ok(mealService.convertToDTO(updatedMeal)); // Convierte a DTO para la respuesta
     }
 
     // Eliminar un alimento
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMeal(@PathVariable Integer id) {
-        Meal meal = mealService.findMealById(id);
-        if (meal == null) {
-            return ResponseEntity.notFound().build();
-        }
-        mealService.deleteMeal(id);
-        return ResponseEntity.ok().build();
+        mealService.deleteMeal(id); // Maneja la excepción en el servicio
+        return ResponseEntity.noContent().build(); // Devuelve un 204 sin contenido
     }
 }
