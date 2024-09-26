@@ -38,8 +38,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     public Appointment update(Integer id, Appointment appointment) {
         Appointment existingAppointment = getOne(id);
         // Update fields as necessary
-        existingAppointment.setType(appointment.getType());
-        // Add other fields as needed
+        existingAppointment.setReason(appointment.getReason());
+        // Update other fields as needed
         return appointmentRepository.save(existingAppointment);
     }
 
