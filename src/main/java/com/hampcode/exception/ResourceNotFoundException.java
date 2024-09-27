@@ -1,6 +1,7 @@
 package com.hampcode.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
+
     public ResourceNotFoundException() {
         super();
     }
@@ -9,3 +10,4 @@ public class ResourceNotFoundException extends RuntimeException {
         super(message);
     }
 }
+
