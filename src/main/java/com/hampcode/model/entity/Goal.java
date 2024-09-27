@@ -1,17 +1,16 @@
 package com.hampcode.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
 
-
 @Data
 @Entity
 @Table(name = "goal")
 public class Goal {
+
     public enum GoalType {
         BAJAR_PESO,
         SUBIR_PESO,
@@ -29,5 +28,4 @@ public class Goal {
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("goal")
     private List<Exercise> Exercises;
-
 }

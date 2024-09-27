@@ -7,7 +7,6 @@ import lombok.Data;
 
 import java.util.List;
 
-
 @Data
 @Entity
 @Table(name = "exercise")
@@ -20,7 +19,6 @@ public class Exercise {
     private String linkVideo;
 
     @Column(name = "image")
-
     private byte[] image;
 
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
@@ -35,4 +33,3 @@ public class Exercise {
     @JsonIgnoreProperties("exercises")
     private List<Tip> Tips;
 }
-
