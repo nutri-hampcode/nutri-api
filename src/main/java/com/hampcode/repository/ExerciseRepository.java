@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface ExerciseRepository extends JpaRepository<Exercise, Integer> {
     List<Exercise> findByGoalId(Integer goalId);
-
 }
