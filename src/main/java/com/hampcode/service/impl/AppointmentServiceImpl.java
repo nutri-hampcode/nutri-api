@@ -1,89 +1,118 @@
 package com.hampcode.service.impl;
 
-import com.hampcode.dto.AppointmentDTO;
-import com.hampcode.dto.AvailabilityDetailsDTO;
+import com.hampcode.dto.AppointmentCreateUpdateDTO;
+import com.hampcode.dto.AppointmentDetailsDTO;
+import com.hampcode.dto.HistoryDTO;
 import com.hampcode.exception.ResourceNotFoundException;
 import com.hampcode.mapper.AppointmentMapper;
 import com.hampcode.model.entity.Appointment;
 import com.hampcode.model.entity.Availability;
-import com.hampcode.model.entity.History;
+import com.hampcode.model.entity.User;
 import com.hampcode.repository.AppointmentRepository;
 import com.hampcode.repository.AvailabilityRepository;
-import com.hampcode.repository.HistoryRepository;
+import com.hampcode.repository.UserRepository;
 import com.hampcode.service.AppointmentService;
-import com.hampcode.mapper.AvailabilityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
-    private final AvailabilityRepository availabilityRepository;
+
     private final AppointmentRepository appointmentRepository;
+    private final UserRepository userRepository;
     private final AppointmentMapper appointmentMapper;
-    private final AvailabilityMapper availabilityMapper;
-    private final HistoryRepository historyRepository;
+    private final AvailabilityRepository availabilityRepository;
 
-    @Override
     @Transactional(readOnly = true)
-    public List<AppointmentDTO> findAll() {
-        List<Appointment> app = appointmentRepository.findAll();
-        return app.stream()
-                .map(appointmentMapper::toDTO).toList();
+    @Override
+    public List<AppointmentDetailsDTO> findAll() {
+        List<Appointment> appointments = appointmentRepository.findAll();
+        return appointments.stream()
+                .map(appointmentMapper::toDetailsDTO)
+                .collect(Collectors.toList());
     }
 
-    @Override
     @Transactional(readOnly = true)
-    public AppointmentDTO getOne(Integer id) {
-        Appointment app = appointmentRepository.findById(Long.valueOf(id))
-                .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + id));
-        return appointmentMapper.toDTO(app);
+    @Override
+    public AppointmentDetailsDTO findById(Integer id) {
+        Appointment appointment = appointmentRepository.findById(Long.valueOf(id))
+                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id: " + id));
+        return appointmentMapper.toDetailsDTO(appointment);
     }
 
-    @Override
     @Transactional
-    public AppointmentDTO create(Integer historyId, AppointmentDTO appointmentDTO) {
-        Availability avai =availabilityRepository.findById(appointmentDTO.getAvailability().getId())
-                .orElseThrow(() ->
-                    new RuntimeException("Availability not found"));
-        Appointment app = appointmentMapper.toEntity(appointmentDTO);
-        if (avai.getReserved()) {
-            throw new IllegalStateException("Selected availability is already reserved.");
+    @Override
+    public AppointmentDetailsDTO create(Integer userId, AppointmentCreateUpdateDTO appointmentDTO) {
+        // Buscar el usuario por ID
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+
+        // Mapear el DTO a la entidad Appointment
+        Appointment appointment = appointmentMapper.toEntity(appointmentDTO);
+
+        // Buscar un availabilityid
+        Availability availability = availabilityRepository.findById(appointmentDTO.getAvailabilityId())
+                .orElseThrow(() -> new ResourceNotFoundException("Availability not found with id: " + appointmentDTO.getAvailabilityId()));
+
+        // Asociar el usuario a la cita
+        appointment.setUser(user);
+
+        // Asegurar que el availability no esté reservado
+        if (availability.getReserved()) {
+            throw new ResourceNotFoundException("Availability is already reserved");
         }
-        avai.setReserved(true);
-        app.setAvailability(avai);
 
-        History history = historyRepository
-                .findById(historyId)
-                .orElseThrow(() -> new ResourceNotFoundException("History not found"));
-        app.setHistory(history);
+        // Marcar la disponibilidad como reservada
+        availability.setReserved(true);
 
-        Appointment savedAppointment = appointmentRepository.save(app);
+        // Asociar el availability a la cita
+        appointment.setAvailability(availability);
 
-        return appointmentMapper.toDTO(savedAppointment);
+        // Guardar la cita en la base de datos
+        appointment = appointmentRepository.save(appointment);
+
+        // Devolver el AppointmentDetailsDTO
+        return appointmentMapper.toDetailsDTO(appointment);
     }
 
-    @Override
+
     @Transactional
-    public AppointmentDTO update(Integer id, AppointmentDTO appointmentDTO) {
-        Appointment existingAppointment = appointmentRepository.findById(Long.valueOf(id))
-                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found"));
-        Availability availa= availabilityRepository.findById(appointmentDTO.getAvailability().getId()).orElseThrow(() -> new ResourceNotFoundException("Availability not found"));
+    @Override
+    public AppointmentDetailsDTO update(Integer id, AppointmentCreateUpdateDTO appointmentDTO) {
+        Appointment appointment = appointmentRepository.findById(Long.valueOf(id))
+                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id: " + id));
 
-        existingAppointment.setReason(appointmentDTO.getReason());
-        existingAppointment.setAvailability(availa);
+        appointment.setReason(appointmentDTO.getReason());
+        appointmentRepository.save(appointment);
 
-        return appointmentMapper.toDTO(appointmentRepository.save(existingAppointment));
+        return appointmentMapper.toDetailsDTO(appointment);
     }
 
-    @Override
     @Transactional
+    @Override
     public void delete(Integer id) {
-        appointmentRepository.deleteById(Long.valueOf(id));
+        Appointment appointment = appointmentRepository.findById(Long.valueOf(id))
+                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id: " + id));
+        appointment.getAvailability().setReserved(false);
+        appointmentRepository.save(appointment);
+        appointmentRepository.delete(appointment);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<HistoryDTO> findHistoryByUserId(Integer userId) {
+        Optional<List<Appointment>> appointments = appointmentRepository.findByUserId(userId);
+
+        return appointments.orElseThrow(() -> new ResourceNotFoundException("No appointments found for user id: " + userId))
+                .stream()
+                .map(appointmentMapper::toHistoryDTO)
+                .collect(Collectors.toList());
     }
 
 
