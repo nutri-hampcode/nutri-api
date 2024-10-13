@@ -54,7 +54,7 @@ public class AvailabilityController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Availability> delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         availabilityService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
