@@ -69,7 +69,7 @@ public class MealServiceImpl implements MealService {
         Meal existingMeal = findMealById(id); // Verifica si la comida existe
         mealRepository.delete(existingMeal); // Elimina la comida
     }
-
+//COMENTARIO PARA VERIFICAR QUE SI CAMBIA LOLOLL
     // Método privado para convertir una entidad Meal a MealDTO (opcional)
     private MealDTO convertToDTO(Meal meal) {
         MealDTO dto = new MealDTO();
