@@ -1,8 +1,9 @@
-package com.hampcode.model.dto;
+package com.hampcode.dto;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import java.math.BigDecimal;
 
 public class MealDTO {
     @NotNull(message = "Name cannot be null")
@@ -11,6 +12,15 @@ public class MealDTO {
 
     @Size(max = 500, message = "Description cannot exceed 500 characters")
     private String description;
+
+    @NotNull(message = "Proteins cannot be null")
+    private BigDecimal proteins;
+
+    @NotNull(message = "Carbs cannot be null")
+    private BigDecimal carbs;
+
+    @NotNull(message = "Fat cannot be null")
+    private BigDecimal fat;
 
     // Getters y Setters
     public String getName() {
@@ -27,5 +37,29 @@ public class MealDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public BigDecimal getProteins() {
+        return proteins;
+    }
+
+    public void setProteins(BigDecimal proteins) {
+        this.proteins = proteins;
+    }
+
+    public BigDecimal getCarbs() {
+        return carbs;
+    }
+
+    public void setCarbs(BigDecimal carbs) {
+        this.carbs = carbs;
+    }
+
+    public BigDecimal getFat() {
+        return fat;
+    }
+
+    public void setFat(BigDecimal fat) {
+        this.fat = fat;
     }
 }
