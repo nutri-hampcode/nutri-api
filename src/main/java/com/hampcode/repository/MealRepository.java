@@ -1,4 +1,4 @@
-package com.hampcode.model.repository;
+package com.hampcode.repository;
 
 import com.hampcode.model.entity.Meal;
 import org.springframework.data.jpa.repository.JpaRepository;
