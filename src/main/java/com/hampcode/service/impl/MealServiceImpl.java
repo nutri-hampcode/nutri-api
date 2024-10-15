@@ -1,15 +1,15 @@
 package com.hampcode.service.impl;
 
-import com.hampcode.dto.MealDTO;
-import com.hampcode.model.entity.Meal;
-import com.hampcode.exception.ResourceNotFoundException;
-import com.hampcode.repository.MealRepository;
-import com.hampcode.service.MealService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.List;
+import com.hampcode.dto.MealDTO;
+import com.hampcode.exception.ResourceNotFoundException;
+import com.hampcode.model.entity.Meal;
+import com.hampcode.repository.MealRepository;
+import com.hampcode.service.MealService;
 
 @Service
 public class MealServiceImpl implements MealService {
@@ -70,7 +70,7 @@ public class MealServiceImpl implements MealService {
         mealRepository.delete(existingMeal); // Elimina la comida
     }
 //COMENTARIO PARA VERIFICAR QUE SI CAMBIA LOLOLL
-    // Método privado para convertir una entidad Meal a MealDTO (opcional)
+    /* Método privado para convertir una entidad Meal a MealDTO (opcional)
     private MealDTO convertToDTO(Meal meal) {
         MealDTO dto = new MealDTO();
         dto.setName(meal.getName());
@@ -81,5 +81,5 @@ public class MealServiceImpl implements MealService {
         dto.setFat(meal.getFat()); // Agregado
         dto.setDietType(meal.getDietType()); // Agregado
         return dto;
-    }
+    }*/
 }
