@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.hampcode.dto;
 
 import com.hampcode.model.entity.User.Allergies;
@@ -41,7 +40,6 @@ public class UserCUDTO {
 
     private Integer dietTypeId;
 }
-=======
 package com.hampcode.dto;
 
 import com.hampcode.model.entity.User.Allergies;
@@ -84,4 +82,3 @@ public class UserCUDTO {
 
     private Integer dietTypeId;
 }
->>>>>>> origin/feature/crud-diethistory
