@@ -74,19 +74,22 @@ public class DietHistoryServiceImpl implements DietHistoryService {
     public DietHistoryDetailsDTO update(Integer id, Integer id_user, Integer id_meal, DietHistoryCUDTO dietUpdateDTO) {
         DietHistory aux = dietHistoryRespository.findById(id)
                 .orElseThrow(()->new ResourceNotFoundException("Diet History not found with id: " + id));
-        dietHistoryRespository.findByUserIdMealTypeAndDate(id_user, dietUpdateDTO.getMealType(), dietUpdateDTO.getDate())
-                .ifPresent(existingDietHistory -> {
-                    throw new BadRequestException("This meal type has already been logged for this user on the specified date.");
-                });
-        if(id_meal != null)
+        if(id_meal == null){
+            if(aux.getMealType() != dietUpdateDTO.getMealType()){
+                dietHistoryRespository.findByUserIdMealTypeAndDate(id_user, dietUpdateDTO.getMealType(), dietUpdateDTO.getDate())
+                        .ifPresent(existingDietHistory -> {
+                            throw new BadRequestException("This meal type has already been logged for this user on the specified date.");
+                        });
+            }
+            aux.setDate(dietUpdateDTO.getDate());
+            aux.setMealType(dietUpdateDTO.getMealType());
+            aux.setPortion_quantity(dietUpdateDTO.getPortion_quantity());
+        }
+        else
         {
             Meal m = mealRepository.findById(id_meal).orElseThrow(()->new ResourceNotFoundException("Meal not found with id: "+ id_meal));
             aux.setMeal(m);
         }
-
-        aux.setDate(dietUpdateDTO.getDate());
-        aux.setMealType(dietUpdateDTO.getMealType());
-        aux.setPortion_quantity(dietUpdateDTO.getPortion_quantity());
 
         return dietHistoryMapper.toDetailsDTO(dietHistoryRespository.save(aux));
     }

@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 public class DietHistoryDetailsDTO {
-    private Integer id;
     private LocalDate date;
     private Float portion_quantity;
     private String user_name;

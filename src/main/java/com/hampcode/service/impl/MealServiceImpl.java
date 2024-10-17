@@ -54,11 +54,9 @@ public class MealServiceImpl implements MealService {
     @Override
     public MealDetailsDTO create(Integer id_diettype, MealCUDTO mealCDTO) {
         DietType dt = dietTypeRepository.findById(id_diettype).orElseThrow(()-> new ResourceNotFoundException("Diet Type not found with id: " + id_diettype));
-        mealRepo.findMealByName(mealCDTO.getName())
+        mealRepo.findMealByNameAndDietTypeId(mealCDTO.getName(), dt.getId())
                 .ifPresent(existingMeal -> {
-                    if (existingMeal.getDietType().getId().equals(id_diettype)) {
-                        throw new BadRequestException("Meal with that Diet Type already exists");
-                    }
+                    throw new BadRequestException("Meal with that Diet Type already exists");
                 });
         Meal m = mealMapper.toEntity(mealCDTO);
         m.setDietType(dt);

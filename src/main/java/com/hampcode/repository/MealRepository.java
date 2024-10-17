@@ -13,5 +13,5 @@ public interface MealRepository extends JpaRepository<Meal, Integer> {
     @Query("SELECT m from Meal m where m.dietType.id = :id_diettype ")
     Optional<List<Meal>> findByDietType(@Param("id_diettype") Integer id_diettype);
 
-    Optional<Meal> findMealByName(String meal_name);
+    Optional<Meal> findMealByNameAndDietTypeId(String meal_name, Integer dietTypeId);
 }
