@@ -16,4 +16,5 @@ public class DietType {
 
     @Column(name = "description", nullable = false)
     private String description;
+}
 

@@ -64,9 +64,8 @@ public class UserServiceImpl implements UserService {
         us.setWeight(user.getWeight());
         us.setAge(user.getAge());
         us.setAllergies(user.getAllergies());
-        us.setGoal(goalRepository.findById(user.getGoalId()).orElse(null));
-        us.setDietType(dietTypeRepository.findById(user.getDietTypeId()).orElse(null));
-
+        us.setGoal(user.getGoalId() != null ? goalRepository.findById(user.getGoalId()).orElse(null) : null);
+        us.setDietType(user.getDietTypeId() != null ? dietTypeRepository.findById(user.getDietTypeId()).orElse(null) : null);
         User updateUser = userRepository.save(us);
         return userMapper.toDTO(updateUser);
     }
