@@ -1,14 +1,16 @@
 package com.hampcode.service;
 
-import com.hampcode.dto.AppointmentDTO;
-import com.hampcode.model.entity.History;
-
 import java.util.List;
 
+import com.hampcode.dto.AppointmentCreateUpdateDTO;
+import com.hampcode.dto.AppointmentDetailsDTO;
+import com.hampcode.dto.HistoryDTO;
+
 public interface AppointmentService {
-    List<AppointmentDTO> findAll();
-    AppointmentDTO getOne(Integer id);
-    AppointmentDTO create(Integer historyId, AppointmentDTO appointment);
-    AppointmentDTO update(Integer id, AppointmentDTO appointment);
+    List<AppointmentDetailsDTO> findAll();
+    AppointmentDetailsDTO findById(Integer id);
+    AppointmentDetailsDTO create(Integer userId, AppointmentCreateUpdateDTO appointmentDTO);
+    AppointmentDetailsDTO update(Integer id, AppointmentCreateUpdateDTO appointmentDTO);
     void delete(Integer id);
+    List<HistoryDTO> findHistoryByUserId(Integer userId);
 }

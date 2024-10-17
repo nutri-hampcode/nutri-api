@@ -7,11 +7,9 @@ import lombok.Data;
 
 @Data
 
-public class AppointmentDTO {
-    private Integer id;
+public class AppointmentCreateUpdateDTO {
     @NotBlank(message = "Reason is mandatory")
     private String reason;
     @NotNull(message = "Availability is mandatory")
-    private AvailabilityDetailsDTO availability;
-
+    private Integer availabilityId;
 }

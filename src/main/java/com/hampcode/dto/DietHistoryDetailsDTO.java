@@ -1,9 +1,10 @@
 package com.hampcode.dto;
 
-import com.hampcode.model.enums.MealType;
-import lombok.Data;
-
 import java.time.LocalDate;
+
+import com.hampcode.model.enums.MealType;
+
+import lombok.Data;
 
 @Data
 public class DietHistoryDetailsDTO {

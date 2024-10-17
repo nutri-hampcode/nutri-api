@@ -1,12 +1,12 @@
 package com.hampcode.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
 import java.math.BigDecimal;
 
 import com.hampcode.model.entity.DietType;
+
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class MealDTO {
     @NotNull(message = "Name cannot be null")

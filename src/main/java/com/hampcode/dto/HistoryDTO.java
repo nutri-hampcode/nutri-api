@@ -6,10 +6,9 @@ import java.time.LocalTime;
 import lombok.Data;
 
 @Data
-public class AvailabilityDetailsDTO {
-    private Integer id;
-    private Boolean reserved;
+public class HistoryDTO {
     private LocalDate date;
     private LocalTime time;
     private String doctorName;
+    private String reason;
 }

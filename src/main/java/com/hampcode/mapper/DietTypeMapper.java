@@ -1,9 +1,10 @@
 package com.hampcode.mapper;
 
-import com.hampcode.dto.DietTypeDTO;
-import com.hampcode.model.entity.DietType;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+
+import com.hampcode.dto.DietTypeDTO;
+import com.hampcode.model.entity.DietType;
 
 @Component
 public class DietTypeMapper {

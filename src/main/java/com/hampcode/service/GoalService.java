@@ -1,8 +1,8 @@
 package com.hampcode.service;
 
-import com.hampcode.model.entity.Goal;
-
 import java.util.List;
+
+import com.hampcode.model.entity.Goal;
 
 public interface GoalService {
     List<Goal> findAll();

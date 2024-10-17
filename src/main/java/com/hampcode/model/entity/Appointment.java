@@ -1,9 +1,16 @@
 package com.hampcode.model.entity;
 
-<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 
@@ -23,11 +30,8 @@ public class Appointment {
     private Availability availability;
 
     @ManyToOne
-    @JoinColumn(name = "history_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_id_history"))
+    @JoinColumn(name = "id_user", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_id_user"))
     @JsonBackReference
-    private History history;
+    private User user;
+
 }
-=======
-public class Appointment {
-}
->>>>>>> origin/feature/crud-diethistory

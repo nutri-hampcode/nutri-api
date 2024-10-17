@@ -1,13 +1,15 @@
 package com.hampcode.service.impl;
 
-import com.hampcode.model.entity.Goal;
-import com.hampcode.repository.GoalRepository;
-import com.hampcode.service.GoalService;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.hampcode.model.entity.Goal;
+import com.hampcode.repository.GoalRepository;
+import com.hampcode.service.GoalService;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
@@ -34,19 +36,11 @@ public class GoalServiceImpl implements GoalService {
     }
 
     @Transactional
-<<<<<<< HEAD
-@Override
-    public Goal update(Integer id, Goal goal) {
-        Goal doc = goalRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Goal not found with id: " + id));
-        doc.setGoalType(goal.getGoalType());
-=======
     @Override
     public Goal update(Integer id, Goal goal) {
         Goal doc = goalRepository.findById(id).
                 orElseThrow(() -> new RuntimeException("Goal not found with id: " + id));
         doc.setName(goal.getName());
->>>>>>> origin/feature/crud-diethistory
         return goalRepository.save(doc);
     }
 

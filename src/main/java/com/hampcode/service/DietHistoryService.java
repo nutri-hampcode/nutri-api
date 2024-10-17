@@ -1,15 +1,12 @@
 package com.hampcode.service;
 
-import com.hampcode.dto.AvailabilityCreateUpdateDTO;
-import com.hampcode.dto.DietHistoryCUDTO;
-import com.hampcode.dto.DietHistoryDetailsDTO;
-import com.hampcode.model.entity.DietHistory;
-import com.hampcode.model.entity.Exercise;
-import com.hampcode.model.entity.InterPlanEx;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import com.hampcode.dto.DietHistoryCUDTO;
+import com.hampcode.dto.DietHistoryDetailsDTO;
 
 public interface DietHistoryService {
     List<DietHistoryDetailsDTO> findAll();

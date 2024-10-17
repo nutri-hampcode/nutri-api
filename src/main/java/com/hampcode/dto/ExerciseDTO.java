@@ -1,8 +1,8 @@
 package com.hampcode.dto;
 
-import lombok.Data;
-
 import java.util.List;
+
+import lombok.Data;
 
 @Data
 public class ExerciseDTO {
@@ -10,6 +10,5 @@ public class ExerciseDTO {
     private String linkVideo;
     private byte[] image;
     private String description;
-    private GoalDTO goal;
     private List<TipDTO> tips;
 }

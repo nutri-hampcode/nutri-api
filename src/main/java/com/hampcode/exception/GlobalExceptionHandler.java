@@ -1,9 +1,8 @@
 package com.hampcode.exception;
 
-<<<<<<< HEAD
+import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
-=======
->>>>>>> origin/feature/crud-diethistory
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import java.time.LocalDateTime;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -43,11 +39,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
-<<<<<<< HEAD
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(@SuppressWarnings("null") MethodArgumentNotValidException ex, @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status, @SuppressWarnings("null") WebRequest request) {
-=======
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
->>>>>>> origin/feature/crud-diethistory
         String msg = ex.getBindingResult().getFieldErrors().stream()
                 .map(e -> e.getField().concat(":").concat(e.getDefaultMessage())
                 ).collect(Collectors.joining(","));
