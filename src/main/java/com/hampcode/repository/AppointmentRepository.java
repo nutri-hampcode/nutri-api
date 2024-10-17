@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
-    @Query("SELECT a from Appointment a where a.availability.id = :id_availability")
-    Optional<List<Appointment>> findByAvailability(@Param("id_availability") Integer id_availability);
+    @Query("SELECT a from Appointment a where a.user.id = :id_user")
+    Optional<List<Appointment>> findByUserId(@Param("id_user") Integer id_user);
 }
+
