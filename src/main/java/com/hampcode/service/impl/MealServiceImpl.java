@@ -82,7 +82,6 @@ public class MealServiceImpl implements MealService {
     @Transactional
     @Override
     public void delete(Integer id) {
-        @SuppressWarnings("unused")
         Meal m = mealRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Meal not found with id: " + id));
         mealRepo.deleteById(id);
     }
