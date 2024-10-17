@@ -5,7 +5,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class NutriApiApplication {
+<<<<<<< HEAD
     public static void main(String[] args) {
         SpringApplication.run(NutriApiApplication.class, args);
     }
 }
+=======
+
+    public static void main(String[] args) {
+        SpringApplication.run(NutriApiApplication.class, args);
+    }
+
+}
+>>>>>>> origin/feature/crud-diethistory

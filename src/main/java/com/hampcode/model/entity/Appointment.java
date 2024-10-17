@@ -1,5 +1,6 @@
 package com.hampcode.model.entity;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -26,3 +27,7 @@ public class Appointment {
     @JsonBackReference
     private History history;
 }
+=======
+public class Appointment {
+}
+>>>>>>> origin/feature/crud-diethistory

@@ -1,6 +1,9 @@
 package com.hampcode.exception;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/feature/crud-diethistory
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -40,7 +43,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
+<<<<<<< HEAD
     protected ResponseEntity<Object> handleMethodArgumentNotValid(@SuppressWarnings("null") MethodArgumentNotValidException ex, @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status, @SuppressWarnings("null") WebRequest request) {
+=======
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+>>>>>>> origin/feature/crud-diethistory
         String msg = ex.getBindingResult().getFieldErrors().stream()
                 .map(e -> e.getField().concat(":").concat(e.getDefaultMessage())
                 ).collect(Collectors.joining(","));

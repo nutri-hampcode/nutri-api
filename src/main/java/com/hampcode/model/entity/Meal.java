@@ -1,5 +1,6 @@
 package com.hampcode.model.entity;
 
+<<<<<<< HEAD
 import java.math.BigDecimal;
 
 import jakarta.persistence.Column;
@@ -19,6 +20,20 @@ public class Meal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+=======
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.math.BigDecimal;
+
+@Data
+@Entity
+@Table(name = "meals")
+public class Meal {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+>>>>>>> origin/feature/crud-diethistory
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -26,7 +41,11 @@ public class Meal {
     @Column(name = "description")
     private String description;
 
+<<<<<<< HEAD
     @Column(name = "calories")
+=======
+    @Column(name = "calories", precision = 10, scale = 2)
+>>>>>>> origin/feature/crud-diethistory
     private Integer calories;
 
     @Column(name = "proteins", precision = 10, scale = 2)
@@ -39,6 +58,13 @@ public class Meal {
     private BigDecimal fat;
 
     @ManyToOne
+<<<<<<< HEAD
     @JoinColumn(name = "diet_type_id", referencedColumnName = "id")
     private DietType dietType;
 }
+=======
+    @JoinColumn(name = "id_meal", referencedColumnName = "id"
+            ,foreignKey = @ForeignKey(name = "FK_id_diettype"))
+    private DietType dietType;
+}
+>>>>>>> origin/feature/crud-diethistory

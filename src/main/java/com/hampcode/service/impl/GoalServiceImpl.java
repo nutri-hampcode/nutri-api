@@ -34,11 +34,19 @@ public class GoalServiceImpl implements GoalService {
     }
 
     @Transactional
+<<<<<<< HEAD
 @Override
     public Goal update(Integer id, Goal goal) {
         Goal doc = goalRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Goal not found with id: " + id));
         doc.setGoalType(goal.getGoalType());
+=======
+    @Override
+    public Goal update(Integer id, Goal goal) {
+        Goal doc = goalRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Goal not found with id: " + id));
+        doc.setName(goal.getName());
+>>>>>>> origin/feature/crud-diethistory
         return goalRepository.save(doc);
     }
 

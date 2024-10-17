@@ -1,5 +1,6 @@
 package com.hampcode.model.entity;
 
+<<<<<<< HEAD
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,3 +31,7 @@ public class NutritionalPlan {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 }
+=======
+public class NutritionalPlan {
+}
+>>>>>>> origin/feature/crud-diethistory

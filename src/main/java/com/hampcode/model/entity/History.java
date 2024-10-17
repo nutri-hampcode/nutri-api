@@ -1,5 +1,6 @@
 package com.hampcode.model.entity;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -22,3 +23,7 @@ public class History {
     @JsonManagedReference
     private List<Appointment> appointments;
 }
+=======
+public class History {
+}
+>>>>>>> origin/feature/crud-diethistory

@@ -16,4 +16,9 @@ public class DietType {
 
     @Column(name = "description", nullable = false)
     private String description;
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> origin/feature/crud-diethistory
