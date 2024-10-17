@@ -1,17 +1,26 @@
 package com.hampcode.api;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.hampcode.dto.MealDTO;
 import com.hampcode.model.entity.Meal;
 import com.hampcode.service.MealService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
 
 @RestController
-@RequestMapping("/api/meals")
+@RequestMapping("/meals")
 public class MealController {
 
     @Autowired
@@ -45,7 +54,6 @@ public class MealController {
         // Llamar al servicio para crear la comida y recibir un objeto Meal
         Meal savedMeal = mealService.createMeal(mealDto);
         
-        System.out.println("Alimento creado con éxito: ID " + savedMeal.getId()); // Log del ID del alimento creado
         return ResponseEntity.status(201).body(savedMeal); // Devolver la entidad Meal creada
     }
 
@@ -54,7 +62,6 @@ public class MealController {
     public ResponseEntity<Meal> updateMeal(@PathVariable Integer id, @Valid @RequestBody MealDTO mealDto) {
         System.out.println("Actualizando alimento ID " + id + ": " + mealDto.getName());
         Meal updatedMeal = mealService.updateMeal(id, mealDto);
-        System.out.println("Alimento actualizado: ID " + updatedMeal.getId());
         return ResponseEntity.ok(updatedMeal);
     }
 

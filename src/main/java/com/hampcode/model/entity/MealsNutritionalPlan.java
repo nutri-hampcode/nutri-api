@@ -12,21 +12,24 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "nutritional_plan")
-public class NutritionalPlan {
+@Table(name = "meals_nutritional_plan")
+public class MealsNutritionalPlan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "type", nullable = false)
-    private String type;
+    @Column(name = "week_day", nullable = false)
+    private String weekDay;
+
+    @Column(name = "meal_type", nullable = false)
+    private String mealType;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id", referencedColumnName = "id")
-    private Doctor doctor;
+    @JoinColumn(name = "nutritional_plan_id", referencedColumnName = "id", nullable = false)
+    private NutritionalPlan nutritionalPlan;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "meal_id", referencedColumnName = "id", nullable = false)
+    private Meal meal;
 }

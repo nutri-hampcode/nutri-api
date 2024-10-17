@@ -1,5 +1,8 @@
 package com.hampcode.dto;
 
+import com.hampcode.model.entity.Doctor;
+import com.hampcode.model.entity.User;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -10,12 +13,12 @@ public class NutritionalPlanDTO {
     private String type;
 
     @NotNull(message = "Doctor cannot be null")
-    private Integer doctorId; // Para referenciar al doctor
+    private Doctor doctor;
 
     @NotNull(message = "User cannot be null")
-    private Integer userId; // Para referenciar al usuario
+    private User user;
 
-    // Getters y Setters
+    // Getters and Setters
     public String getType() {
         return type;
     }
@@ -24,19 +27,19 @@ public class NutritionalPlanDTO {
         this.type = type;
     }
 
-    public Integer getDoctorId() {
-        return doctorId;
+    public Doctor getDoctor() {
+        return doctor;
     }
 
-    public void setDoctorId(Integer doctorId) {
-        this.doctorId = doctorId;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
