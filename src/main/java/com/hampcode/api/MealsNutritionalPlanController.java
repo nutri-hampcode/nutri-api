@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.Valid;
 import com.hampcode.dto.MealsNutritionalPlanDTO;
+import com.hampcode.dto.MealsNutritionalPlanDetailsDTO;
 import com.hampcode.model.entity.MealsNutritionalPlan;
 import com.hampcode.service.MealsNutritionalPlanService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/meals_nutritional_plans")
@@ -26,10 +28,26 @@ public class MealsNutritionalPlanController {
     private MealsNutritionalPlanService mealsNutritionalPlanService;
 
     @GetMapping
-    public ResponseEntity<List<MealsNutritionalPlan>> getAllMealsNutritionalPlans() {
+    public ResponseEntity<List<MealsNutritionalPlanDetailsDTO>> getAllMealsNutritionalPlans() {
         List<MealsNutritionalPlan> plans = mealsNutritionalPlanService.findAllMealsNutritionalPlans();
-        return ResponseEntity.ok(plans);
+        
+        List<MealsNutritionalPlanDetailsDTO> dtoList = plans.stream().map(plan -> {
+            MealsNutritionalPlanDetailsDTO dto = new MealsNutritionalPlanDetailsDTO();
+            dto.setWeekDay(plan.getWeekDay());
+            dto.setMealType(plan.getMealType());
+            
+            dto.setNutritionalPlan(plan.getNutritionalPlan().getType() + " (" 
+                + plan.getNutritionalPlan().getDoctor().getFirstName() 
+                + " " + plan.getNutritionalPlan().getDoctor().getLastName() + ")");
+            
+            dto.setMeal(plan.getMeal().getName() + " (" + plan.getMeal().getDescription() + ")");
+            
+            return dto;
+        }).toList();
+    
+        return ResponseEntity.ok(dtoList);
     }
+    
 
     @GetMapping("/{id}")
     public ResponseEntity<MealsNutritionalPlan> getMealsNutritionalPlanById(@PathVariable Integer id) {

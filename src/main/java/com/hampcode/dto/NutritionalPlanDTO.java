@@ -5,7 +5,9 @@ import com.hampcode.model.entity.User;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 public class NutritionalPlanDTO {
 
     @NotNull(message = "Type cannot be null")
@@ -17,29 +19,4 @@ public class NutritionalPlanDTO {
 
     @NotNull(message = "User cannot be null")
     private User user;
-
-    // Getters and Setters
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
