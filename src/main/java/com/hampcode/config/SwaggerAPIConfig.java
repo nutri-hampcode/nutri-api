@@ -1,52 +1,46 @@
 package com.hampcode.config;
 
-import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
-import io.swagger.v3.oas.models.security.SecurityRequirement;
-import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.List;
-
 @Configuration
 public class SwaggerAPIConfig {
 
-    @Value("${nutri-api.openapi.dev-url}")
+    @Value("${nutri.openapi.dev-url}")
     private String devUrl;
 
     @Bean
-    public OpenAPI myOpenAPI(){
-        //Definir el servidor de desarrollo
+    public OpenAPI myOpenAPI() {
+        // Definir el servidor de desarrollo
         Server devServer = new Server();
-        devServer.setUrl(devUrl);
+        devServer.setUrl(this.devUrl);
         devServer.setDescription("Development Server");
 
-        //Informacion de contacto
+        // Informacion de contacto
         Contact contact = new Contact();
-        contact.setEmail("nutrimed@gmail.com");
-        contact.setName("Nutrimed");
-        contact.setUrl("https://t.ly/gwCPV");
+        contact.setEmail("correofeo2718@gmail.com");
+        contact.setName("NutriMedTeam");
+        contact.setUrl("https://elysian-c.github.io/NutriMed/landing");
 
         License mitLicense = new License().name("MIT License").url("https://opensource.org/licenses/MIT");
 
-        //Informacion general de la API
+        // Informacion general de la API
         Info info = new Info()
-                .title("API Nutrimed planes nutricionales")
+                .title("API NutriMed Vida Saludable")
                 .version("1.0")
                 .contact(contact)
-                .description("API Restful de nutrimed")
-                .termsOfService("https://t.ly/gwCPV")
+                .description("API Nutrimed, mejorar calidad de vida")
+                .termsOfService("https://elysian-c.github.io/NutriMed/landing")
                 .license(mitLicense);
 
         return new OpenAPI()
                 .info(info)
                 .addServersItem(devServer);
     }
-
 }
