@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hampcode.dto.MealDetailsDTO;
 import com.hampcode.dto.MealsNutritionalPlanDTO;
 import com.hampcode.dto.MealsNutritionalPlanDetailsDTO;
+import com.hampcode.model.entity.Meal;
 import com.hampcode.model.entity.MealsNutritionalPlan;
 import com.hampcode.service.MealsNutritionalPlanService;
 
@@ -72,4 +74,26 @@ public class MealsNutritionalPlanController {
         mealsNutritionalPlanService.deleteMealsNutritionalPlan(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @GetMapping("/nutritional-plan/{id}/meals")
+    public ResponseEntity<List<MealDetailsDTO>> getMealsByNutritionalPlanId(@PathVariable Integer id) {
+        List<Meal> meals = mealsNutritionalPlanService.findMealsByNutritionalPlanId(id);
+        
+        List<MealDetailsDTO> mealDTOs = meals.stream().map(meal -> {
+            MealDetailsDTO mealDTO = new MealDetailsDTO();
+            mealDTO.setName(meal.getName());
+            mealDTO.setDescription(meal.getDescription());
+            mealDTO.setCalories(meal.getCalories());
+            mealDTO.setProteins(meal.getProteins());
+            mealDTO.setCarbs(meal.getCarbs());
+            mealDTO.setFat(meal.getFat());
+            if (meal.getDietType() != null) {
+                mealDTO.setDietType(meal.getDietType().getType());
+            }
+            return mealDTO;
+        }).toList();
+
+        return ResponseEntity.ok(mealDTOs);
+    }
+
 }

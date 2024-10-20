@@ -77,4 +77,12 @@ public class MealsNutritionalPlanServiceImpl implements MealsNutritionalPlanServ
         MealsNutritionalPlan existingPlan = findMealsNutritionalPlanById(id);
         mealsNutritionalPlanRepository.delete(existingPlan);
     }
+
+    @Override
+    public List<Meal> findMealsByNutritionalPlanId(Integer nutritionalPlanId) {
+        return mealsNutritionalPlanRepository.findByNutritionalPlanId(nutritionalPlanId)
+                    .stream()
+                    .map(MealsNutritionalPlan::getMeal)
+                    .toList();
+    }    
 }
