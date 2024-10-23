@@ -20,7 +20,8 @@ public class DietHistoryMapper {
 
     public DietHistoryDetailsDTO toDetailsDTO(DietHistory dietHistory) {
         DietHistoryDetailsDTO dietHistoryDetailsDTO = modelMapper.map(dietHistory, DietHistoryDetailsDTO.class);
-        dietHistoryDetailsDTO.setUser_name(dietHistory.getUser().getName());
+
+        dietHistoryDetailsDTO.setUser_name(dietHistory.getUser().getCustomer().getName());
         MealDetailsDTO mealDetailsDTO = mealMapper.toDetailsDTO(dietHistory.getMeal());
         dietHistoryDetailsDTO.setMeal(mealDetailsDTO);
         dietHistoryDetailsDTO.setMeal_type(dietHistory.getMealType());
