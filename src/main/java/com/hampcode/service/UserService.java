@@ -1,8 +1,8 @@
 package com.hampcode.service;
 
-import com.hampcode.dto.UserCUDTO;
-
 import java.util.List;
+
+import com.hampcode.dto.UserCUDTO;
 
 public interface UserService {
     List<UserCUDTO> findAll();

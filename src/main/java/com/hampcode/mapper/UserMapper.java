@@ -14,6 +14,7 @@ import com.hampcode.dto.UserRegistrationDTO;
 public class UserMapper {
     private final ModelMapper modelMapper;
 
+
     public UserMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
@@ -50,5 +51,6 @@ public class UserMapper {
         authResponseDTO.setRole(user.getRole().getName().name());
 
         return authResponseDTO;
+
     }
 }

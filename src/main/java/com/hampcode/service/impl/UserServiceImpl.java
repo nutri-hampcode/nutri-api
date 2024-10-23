@@ -1,20 +1,21 @@
 package com.hampcode.service.impl;
 
-import com.hampcode.dto.UserCUDTO;
-import com.hampcode.dto.UserLoginDTO;
-import com.hampcode.model.entity.User;
-import com.hampcode.repository.UserRepository;
-import com.hampcode.repository.GoalRepository;
-import com.hampcode.repository.DietTypeRepository;
-import com.hampcode.service.UserService;
-import com.hampcode.mapper.UserMapper;
-import com.hampcode.exception.ResourceNotFoundException;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.hampcode.dto.UserCUDTO;
+import com.hampcode.exception.ResourceNotFoundException;
+import com.hampcode.mapper.UserMapper;
+import com.hampcode.model.entity.User;
+import com.hampcode.repository.DietTypeRepository;
+import com.hampcode.repository.GoalRepository;
+import com.hampcode.repository.UserRepository;
+import com.hampcode.service.UserService;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
@@ -64,9 +65,8 @@ public class UserServiceImpl implements UserService {
         us.setWeight(user.getWeight());
         us.setAge(user.getAge());
         us.setAllergies(user.getAllergies());
-        us.setGoal(goalRepository.findById(user.getGoalId()).orElse(null));
-        us.setDietType(dietTypeRepository.findById(user.getDietTypeId()).orElse(null));
-
+        us.setGoal(user.getGoalId() != null ? goalRepository.findById(user.getGoalId()).orElse(null) : null);
+        us.setDietType(user.getDietTypeId() != null ? dietTypeRepository.findById(user.getDietTypeId()).orElse(null) : null);
         User updateUser = userRepository.save(us);
         return userMapper.toDTO(updateUser);
     }

@@ -4,6 +4,7 @@ import com.hampcode.model.entity.Customer.Allergies;
 
 import com.hampcode.model.entity.Role;
 import jakarta.validation.constraints.*;
+
 import lombok.Data;
 
 @Data
@@ -11,12 +12,14 @@ public class UserCUDTO {
     private Integer id;
 
     @NotBlank(message = "Name is required")
+
     private String name;
 
     @NotBlank(message = "Username is required")
     private String username;
 
     @NotBlank(message = "Email is required")
+
     private String email;
 
     @Positive(message = "Height must be a positive number")
@@ -36,4 +39,5 @@ public class UserCUDTO {
     private Integer dietTypeId;
 
     private Role role;
+
 }
