@@ -1,11 +1,9 @@
 package com.hampcode.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jdk.jfr.BooleanFlag;
-import lombok.Data;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import lombok.Data;
 
 @Data
 public class AvailabilityDetailsDTO {
