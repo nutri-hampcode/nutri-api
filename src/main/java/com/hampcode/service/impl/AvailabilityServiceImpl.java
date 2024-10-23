@@ -10,11 +10,9 @@ import com.hampcode.repository.AvailabilityRepository;
 import com.hampcode.repository.DoctorRepository;
 import com.hampcode.service.AvailabilityService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor

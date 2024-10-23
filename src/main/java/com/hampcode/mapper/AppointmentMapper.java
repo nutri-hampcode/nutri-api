@@ -1,12 +1,13 @@
 package com.hampcode.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.hampcode.dto.AppointmentCreateUpdateDTO;
 import com.hampcode.dto.AppointmentDetailsDTO;
-import com.hampcode.dto.HistoryDTO;
 import com.hampcode.dto.AvailabilityDetailsDTO;
+import com.hampcode.dto.HistoryDTO;
 import com.hampcode.model.entity.Appointment;
 import com.hampcode.model.entity.Availability;
-import org.springframework.stereotype.Component;
 
 @Component
 public class AppointmentMapper {

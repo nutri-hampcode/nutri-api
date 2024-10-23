@@ -2,7 +2,6 @@ package com.hampcode.service;
 
 import com.hampcode.dto.AvailabilityCreateUpdateDTO;
 import com.hampcode.dto.AvailabilityDetailsDTO;
-import com.hampcode.model.entity.Availability;
 
 import java.util.List;
 

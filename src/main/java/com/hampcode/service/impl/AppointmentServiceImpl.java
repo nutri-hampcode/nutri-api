@@ -1,5 +1,12 @@
 package com.hampcode.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.hampcode.dto.AppointmentCreateUpdateDTO;
 import com.hampcode.dto.AppointmentDetailsDTO;
 import com.hampcode.dto.HistoryDTO;
@@ -12,13 +19,8 @@ import com.hampcode.repository.AppointmentRepository;
 import com.hampcode.repository.AvailabilityRepository;
 import com.hampcode.repository.UserRepository;
 import com.hampcode.service.AppointmentService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service

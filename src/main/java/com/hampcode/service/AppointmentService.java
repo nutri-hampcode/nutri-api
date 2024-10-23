@@ -1,10 +1,10 @@
 package com.hampcode.service;
 
+import java.util.List;
+
 import com.hampcode.dto.AppointmentCreateUpdateDTO;
 import com.hampcode.dto.AppointmentDetailsDTO;
 import com.hampcode.dto.HistoryDTO;
-
-import java.util.List;
 
 public interface AppointmentService {
     List<AppointmentDetailsDTO> findAll();
