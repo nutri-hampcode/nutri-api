@@ -2,6 +2,7 @@ package com.hampcode.api;
 
 import java.util.List;
 
+import com.hampcode.dto.NutritionalPlanDetailsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,29 +33,38 @@ public class MealsNutritionalPlanController {
     @GetMapping
     public ResponseEntity<List<MealsNutritionalPlanDetailsDTO>> getAllMealsNutritionalPlans() {
         List<MealsNutritionalPlan> plans = mealsNutritionalPlanService.findAllMealsNutritionalPlans();
-        
+
         List<MealsNutritionalPlanDetailsDTO> dtoList = plans.stream().map(plan -> {
             MealsNutritionalPlanDetailsDTO dto = new MealsNutritionalPlanDetailsDTO();
             dto.setWeekDay(plan.getWeekDay());
             dto.setMealType(plan.getMealType());
-            
-            dto.setNutritionalPlan(plan.getNutritionalPlan().getType() + " (" 
-                + plan.getNutritionalPlan().getDoctor().getFirstName() 
-                + " " + plan.getNutritionalPlan().getDoctor().getLastName() + ")");
-            
+
+            dto.setNutritionalPlan(plan.getNutritionalPlan().getType() + " ("
+                    + plan.getNutritionalPlan().getDoctor().getFirstName()
+                    + " " + plan.getNutritionalPlan().getDoctor().getLastName() + ")");
+
             dto.setMeal(plan.getMeal().getName() + " (" + plan.getMeal().getDescription() + ")");
-            
+
             return dto;
         }).toList();
-    
+
         return ResponseEntity.ok(dtoList);
     }
-    
+
 
     @GetMapping("/{id}")
-    public ResponseEntity<MealsNutritionalPlan> getMealsNutritionalPlanById(@PathVariable Integer id) {
+    public ResponseEntity<MealsNutritionalPlanDetailsDTO> getMealsNutritionalPlanById(@PathVariable Integer id) {
         MealsNutritionalPlan plan = mealsNutritionalPlanService.findMealsNutritionalPlanById(id);
-        return ResponseEntity.ok(plan);
+        MealsNutritionalPlanDetailsDTO dto = new MealsNutritionalPlanDetailsDTO();
+        dto.setWeekDay(plan.getWeekDay());
+        dto.setMealType(plan.getMealType());
+        dto.setMeal(plan.getMeal().getName() + " (" + plan.getMeal().getDescription() + ")");
+
+        dto.setNutritionalPlan(plan.getNutritionalPlan().getType() + " ("
+                + plan.getNutritionalPlan().getDoctor().getFirstName()
+                + " " + plan.getNutritionalPlan().getDoctor().getLastName() + ")");
+
+        return ResponseEntity.ok(dto);
     }
 
     @PostMapping
@@ -74,11 +84,11 @@ public class MealsNutritionalPlanController {
         mealsNutritionalPlanService.deleteMealsNutritionalPlan(id);
         return ResponseEntity.noContent().build();
     }
-    
+
     @GetMapping("/nutritional-plan/{id}/meals")
     public ResponseEntity<List<MealDetailsDTO>> getMealsByNutritionalPlanId(@PathVariable Integer id) {
         List<Meal> meals = mealsNutritionalPlanService.findMealsByNutritionalPlanId(id);
-        
+
         List<MealDetailsDTO> mealDTOs = meals.stream().map(meal -> {
             MealDetailsDTO mealDTO = new MealDetailsDTO();
             mealDTO.setName(meal.getName());

@@ -38,22 +38,26 @@ public class NutritionalPlanController {
     @GetMapping("/plans")
     public List<NutritionalPlanDetailsDTO> getAllNutritionalPlans() {
         return nutritionalPlanService.findAllNutritionalPlans()
-            .stream()
-            .map(plan -> {
-                NutritionalPlanDetailsDTO dto = new NutritionalPlanDetailsDTO();
-                dto.setType(plan.getType());
-                dto.setDoctor(plan.getDoctor().getFirstName() + " (" + plan.getDoctor().getLastName() + ")");
-                dto.setUser(plan.getUser().getName() + " (" + plan.getUser().getUsername() + ")");
-                return dto;
-            })
-            .collect(Collectors.toList());
+                .stream()
+                .map(plan -> {
+                    NutritionalPlanDetailsDTO dto = new NutritionalPlanDetailsDTO();
+                    dto.setType(plan.getType());
+                    dto.setDoctor(plan.getDoctor().getFirstName() + " (" + plan.getDoctor().getLastName() + ")");
+                    dto.setUser(plan.getUser().getCustomer().getName() + " (" + plan.getUser().getCustomer().getUsername() + ")");
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 
     // Get a nutritional plan by ID
     @GetMapping("/plans/{id}")
-    public ResponseEntity<NutritionalPlan> getNutritionalPlanById(@PathVariable Integer id) {
+    public ResponseEntity<NutritionalPlanDetailsDTO> getNutritionalPlanById(@PathVariable Integer id) {
         NutritionalPlan plan = nutritionalPlanService.findNutritionalPlanById(id);
-        return ResponseEntity.ok(plan);
+        NutritionalPlanDetailsDTO dto = new NutritionalPlanDetailsDTO();
+        dto.setType(plan.getType());
+        dto.setDoctor(plan.getDoctor().getFirstName() + " (" + plan.getDoctor().getLastName() + ")");
+        dto.setUser(plan.getUser().getCustomer().getName() + " (" + plan.getUser().getCustomer().getUsername() + ")");
+        return ResponseEntity.ok(dto);
     }
 
     // Create a new nutritional plan using NutritionalPlanDTO
