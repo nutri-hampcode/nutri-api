@@ -10,11 +10,16 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 
+import java.util.List;
+
 @Configuration
 public class SwaggerAPIConfig {
 
     @Value("${nutri-api.openapi.dev-url}")
     private String devUrl;
+
+    @Value("${nutri-api.openapi.prod-url}")
+    private String prodUrl;
 
     @Bean
     public OpenAPI myOpenAPI(){
@@ -22,6 +27,10 @@ public class SwaggerAPIConfig {
         Server devServer = new Server();
         devServer.setUrl(devUrl);
         devServer.setDescription("Development Server");
+
+        Server prodServer = new Server();
+        prodServer.setUrl(prodUrl);
+        prodServer.setDescription("Production Server");
 
         //Informacion de contacto
         Contact contact = new Contact();
@@ -42,7 +51,7 @@ public class SwaggerAPIConfig {
 
         return new OpenAPI()
                 .info(info)
-                .addServersItem(devServer);
+                .servers(List.of(devServer, prodServer));
     }
 
 }
