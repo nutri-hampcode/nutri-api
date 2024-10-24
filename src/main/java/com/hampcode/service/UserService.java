@@ -1,17 +1,19 @@
 package com.hampcode.service;
 
-import com.hampcode.dto.UserCUDTO;
-
 import java.util.List;
+
+import com.hampcode.dto.AuthResponseDTO;
+import com.hampcode.dto.UserCUDTO;
+import com.hampcode.dto.UserLoginDTO;
+import com.hampcode.dto.UserRegistrationDTO;
 
 public interface UserService {
     List<UserCUDTO> findAll();
     UserCUDTO getOne(Integer id);
-    UserCUDTO create(UserCUDTO user);
+    UserCUDTO create(UserRegistrationDTO user);
     UserCUDTO update(Integer id, UserCUDTO user);
-    UserCUDTO findByUsername(String username);
     UserCUDTO findByEmail(String email);
-    void delete(Integer id);
-    boolean checkCredentials(String username, String password);
+    AuthResponseDTO login(UserLoginDTO userLoginDTO);
+    void delete(Integer id);;
     void recoverAccount(String email, String password);
 }

@@ -1,12 +1,13 @@
 package com.hampcode.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.hampcode.dto.AppointmentCreateUpdateDTO;
 import com.hampcode.dto.AppointmentDetailsDTO;
-import com.hampcode.dto.HistoryDTO;
 import com.hampcode.dto.AvailabilityDetailsDTO;
+import com.hampcode.dto.HistoryDTO;
 import com.hampcode.model.entity.Appointment;
 import com.hampcode.model.entity.Availability;
-import org.springframework.stereotype.Component;
 
 @Component
 public class AppointmentMapper {
@@ -19,11 +20,9 @@ public class AppointmentMapper {
 
         AvailabilityDetailsDTO availabilityDTO = new AvailabilityDetailsDTO();
         Availability availability = appointment.getAvailability();
-        availabilityDTO.setId(availability.getId());
         availabilityDTO.setDate(availability.getDate());
         availabilityDTO.setTime(availability.getTime());
-        availabilityDTO.setDoctorName(availability.getDoctor().getFirstName());
-        availabilityDTO.setDoctorName(availability.getDoctor().getLastName());
+        availabilityDTO.setDoctorName(availability.getDoctor().getFirstName() +" "+ availability.getDoctor().getLastName());
         availabilityDTO.setReserved(availability.getReserved());
 
         dto.setAvailability(availabilityDTO);
@@ -41,8 +40,7 @@ public class AppointmentMapper {
         HistoryDTO dto = new HistoryDTO();
         dto.setDate(appointment.getAvailability().getDate());
         dto.setTime(appointment.getAvailability().getTime());
-        dto.setDoctorName(appointment.getAvailability().getDoctor().getFirstName());
-        dto.setDoctorName(appointment.getAvailability().getDoctor().getLastName());
+        dto.setDoctorName(appointment.getAvailability().getDoctor().getFirstName()+" "+appointment.getAvailability().getDoctor().getLastName());
         dto.setReason(appointment.getReason());
         return dto;
     }

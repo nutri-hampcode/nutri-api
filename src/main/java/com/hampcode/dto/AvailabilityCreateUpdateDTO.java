@@ -1,12 +1,11 @@
 package com.hampcode.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import jakarta.validation.constraints.NotNull;
 import jdk.jfr.BooleanFlag;
 import lombok.Data;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Data
 public class AvailabilityCreateUpdateDTO {
