@@ -41,18 +41,14 @@ public class UserMembershipServiceImpl implements UserMembershipService {
 
     @Transactional
     public UserMembershipDetailsDTO confirmMembership(Integer userId) {
-        System.out.println("AAAAAAAAAAAAAAAAAAA000000");
         UserMembership userMembership = userMembershipRepository.findByUserId(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("UserMembership not found for User with id: " + userId));
-        System.out.println("AAAAAAAAAAAAAAAAAAA111111");
 
         // Actualiza la membresía con los detalles necesarios
         userMembership.setEnd_date(userMembership.getStart_date().plusMonths(1));
         userMembership.setStatus(true);
-        System.out.println("AAAAAAAAAAAAAAAAAAA22222");
         // Guarda los cambios en el repositorio
         UserMembership savedUserMembership = userMembershipRepository.save(userMembership);
-        System.out.println("AAAAAAAAAAAAAAAAAAA3333");
 
         // Devuelve los detalles de la membresía actualizada
         return UserMembershipMapper.toDetailsDTO(savedUserMembership);
