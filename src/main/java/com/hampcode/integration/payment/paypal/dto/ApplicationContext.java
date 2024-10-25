@@ -15,7 +15,4 @@ public class ApplicationContext {
 
     @JsonProperty("cancel_url")
     private String cancelUrl;
-
-
-
 }

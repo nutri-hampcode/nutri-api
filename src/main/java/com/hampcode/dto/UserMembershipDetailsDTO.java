@@ -13,3 +13,4 @@ public class UserMembershipDetailsDTO {
     private double price;
     private boolean status;
 }
+

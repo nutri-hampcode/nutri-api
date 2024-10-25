@@ -2,14 +2,11 @@ package com.hampcode.service.impl;
 
 import com.hampcode.dto.PaymentCaptureResponse;
 import com.hampcode.dto.PaymentOrderResponse;
-import com.hampcode.dto.UserMembershipCreateUpdateDTO;
 import com.hampcode.dto.UserMembershipDetailsDTO;
-import com.hampcode.exception.ResourceNotFoundException;
 import com.hampcode.integration.payment.paypal.dto.OrderCaptureResponse;
 import com.hampcode.integration.payment.paypal.dto.OrderResponse;
 import com.hampcode.integration.payment.paypal.service.CheckoutService;
 import com.hampcode.integration.payment.paypal.service.PaypalService;
-import com.hampcode.model.entity.UserMembership;
 import com.hampcode.service.UserMembershipService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -50,7 +47,6 @@ public class CheckoutServiceImpl implements CheckoutService {
         paymentCaptureResponse.setCompleted(completed);
 
         if (completed) {
-            System.out.println("AAAAAAAAAAAAAAAAAAA777777");
             String purchaseIdStr = orderCaptureResponse.getPurchaseUnits().get(0).getReferenceId();
             UserMembershipDetailsDTO userMembershipDetailsDTO = userMembershipService.confirmMembership(Integer.parseInt(String.valueOf(purchaseIdStr)));
             paymentCaptureResponse.setPurchaseId(userMembershipDetailsDTO.getId());

@@ -13,3 +13,4 @@ public class TokenResponse {
     @JsonProperty("expires_in")
     private String expiresIn;
 }
+

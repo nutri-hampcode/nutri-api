@@ -9,3 +9,4 @@ public class Amount {
     private String currencyCode;
     private String value;
 }
+

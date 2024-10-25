@@ -7,3 +7,4 @@ public class PaymentCaptureResponse {
     private boolean completed;
     private Integer purchaseId;
 }
+

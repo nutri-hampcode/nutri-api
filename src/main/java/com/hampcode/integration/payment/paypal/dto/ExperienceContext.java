@@ -26,5 +26,4 @@ public class ExperienceContext {
 
     @JsonProperty("cancel_url")
     private String cancelUrl;
-
 }

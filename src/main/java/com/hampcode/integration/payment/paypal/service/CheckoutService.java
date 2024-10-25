@@ -11,3 +11,4 @@ public interface CheckoutService {
 
     PaymentCaptureResponse capturePayment(Integer userMembershipId);
 }
+

@@ -93,7 +93,6 @@ public class PaypalService {
                 .retrieve()
                 .toEntity(OrderResponse.class)
                 .getBody();
-
     }
 
     public OrderCaptureResponse captureOrder(String orderId) {
@@ -107,6 +106,7 @@ public class PaypalService {
                 .getBody();
     }
 }
+
 
 
 

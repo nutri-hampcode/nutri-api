@@ -13,5 +13,4 @@ public class OrderResponse {
     private PaymentSource paymentSource;
 
     private List<Link> links;
-
 }

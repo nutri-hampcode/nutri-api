@@ -10,5 +10,4 @@ public class OrderCaptureResponse {
 
     @JsonProperty("purchase_units")
     private List<PurchaseUnit> purchaseUnits;
-
 }

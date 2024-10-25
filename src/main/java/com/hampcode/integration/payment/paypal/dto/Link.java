@@ -8,3 +8,4 @@ public class Link {
     private String rel;
     private String method;
 }
+
