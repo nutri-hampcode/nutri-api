@@ -60,6 +60,7 @@ public class MealServiceImpl implements MealService {
                 });
         Meal m = mealMapper.toEntity(mealCDTO);
         m.setDietType(dt);
+        m.setImage(m.getImage());
         return mealMapper.toDetailsDTO(mealRepo.save(m));
     }
 
@@ -70,11 +71,13 @@ public class MealServiceImpl implements MealService {
                 .orElseThrow(()->new ResourceNotFoundException("Meal not found with id: " + id));
 
         m.setName(mealUDTO.getName());
+
         m.setDescription(mealUDTO.getDescription());
         m.setCalories(mealUDTO.getCalories());
         m.setCarbs(mealUDTO.getCarbs());
         m.setProteins(mealUDTO.getProteins());
         m.setFat(mealUDTO.getFat());
+        m.setImage(m.getImage());
 
         return mealMapper.toDetailsDTO(mealRepo.save(m));
     }
