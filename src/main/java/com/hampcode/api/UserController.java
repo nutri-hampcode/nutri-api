@@ -2,6 +2,8 @@ package com.hampcode.api;
 
 import java.util.List;
 
+import com.hampcode.dto.AuthResponseDTO;
+import com.hampcode.dto.UserRegistrationDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,30 +36,6 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<UserCUDTO> register(@Valid @RequestBody UserCUDTO userDTO){
-        UserCUDTO u = userService.create(userDTO);
-        return new ResponseEntity<>(u, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@Valid @RequestBody UserLoginDTO userLoginDTO){
-        if (userService.checkCredentials(userLoginDTO.getUsername(),userLoginDTO.getPassword())){
-            return new ResponseEntity<>("Login successful", HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>("Invalid login", HttpStatus.UNAUTHORIZED);
-        }
-    }
-
-    @PostMapping("/recover")
-    public ResponseEntity<String> recover(@Valid @RequestBody UserCUDTO userDTO){
-        try{
-            userService.recoverAccount(userDTO.getEmail(),userDTO.getPassword());
-            return ResponseEntity.ok("Password updated successfully");
-        }catch(RuntimeException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserCUDTO> get(@PathVariable Integer id){

@@ -43,7 +43,7 @@ public class NutritionalPlanController {
                 NutritionalPlanDetailsDTO dto = new NutritionalPlanDetailsDTO();
                 dto.setType(plan.getType());
                 dto.setDoctor(plan.getDoctor().getFirstName() + " (" + plan.getDoctor().getLastName() + ")");
-                dto.setUser(plan.getUser().getName() + " (" + plan.getUser().getUsername() + ")");
+                dto.setUser(plan.getUser().getCustomer().getName() + " (" + plan.getUser().getCustomer().getUsername() + ")");
                 return dto;
             })
             .collect(Collectors.toList());
