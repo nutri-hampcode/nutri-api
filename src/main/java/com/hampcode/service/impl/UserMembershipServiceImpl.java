@@ -40,25 +40,38 @@ public class UserMembershipServiceImpl implements UserMembershipService {
     }
 
     @Transactional
-    @Override
+    public UserMembershipDetailsDTO confirmMembership(Integer userId) {
+        UserMembership userMembership = userMembershipRepository.findByUserId(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("UserMembership not found for User with id: " + userId));
+
+        // Actualiza la membresía con los detalles necesarios
+        userMembership.setEnd_date(userMembership.getStart_date().plusMonths(1));
+        userMembership.setStatus(true);
+        // Guarda los cambios en el repositorio
+        UserMembership savedUserMembership = userMembershipRepository.save(userMembership);
+
+        // Devuelve los detalles de la membresía actualizada
+        return UserMembershipMapper.toDetailsDTO(savedUserMembership);
+    }
+
+    @Transactional
     public UserMembershipDetailsDTO create(Integer userId, UserMembershipCreateUpdateDTO userMembershipDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
-        //si el usuario cuenta con membresia no se puede registrar otra
-        if(userMembershipRepository.existsByUserId(userId)){
+        // Si el usuario ya tiene una membresía, no se puede registrar otra
+        if (userMembershipRepository.existsByUserId(userId)) {
             throw new ResourceNotFoundException("User already has a membership");
         }
+
+        // Crear la nueva membresía
         UserMembership userMembership = userMembershipMapper.toUserMembership(userMembershipDto);
         userMembership.setUser(user);
-        //setEnd_date
-        userMembership.setEnd_date(userMembership.getStart_date().plusMonths(1));
+        userMembershipRepository.save(userMembership);
 
-        userMembership.setStatus(true);
-
-        UserMembership savedUserMembership = userMembershipRepository.save(userMembership);
-        return UserMembershipMapper.toDetailsDTO(savedUserMembership);
+        return UserMembershipMapper.toDetailsDTO(userMembership);
     }
+
 
     @Transactional
     @Override

@@ -3,6 +3,7 @@ package com.hampcode.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.hampcode.exception.BadRequestException;
 import com.hampcode.repository.RoleRepository;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.stereotype.Service;
@@ -67,6 +68,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserCUDTO create(UserRegistrationDTO userRegistrationDTO) {
+        userRepository.findByEmail(userRegistrationDTO.getEmail())
+                .ifPresent(existingUser -> {
+                    throw new BadRequestException("Error: Email is already registered.");
+                });
         userRegistrationDTO.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         User user= userMapper.toUserEntity(userRegistrationDTO);
         Role role = roleRepository.findByName(ERole.CUSTOMER)
