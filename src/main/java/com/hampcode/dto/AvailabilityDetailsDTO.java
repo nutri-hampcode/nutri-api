@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class AvailabilityDetailsDTO {
+    private Integer id;
     private Boolean reserved;
     private LocalDate date;
     private LocalTime time;
