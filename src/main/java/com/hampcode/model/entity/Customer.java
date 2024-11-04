@@ -36,7 +36,7 @@ public class Customer {
             ,foreignKey = @ForeignKey(name = "FK_id_goal"))
     private Goal goal;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_diet_type", referencedColumnName = "id"
             ,foreignKey = @ForeignKey(name = "FK_id_diet_types"))
     private DietType dietType;
