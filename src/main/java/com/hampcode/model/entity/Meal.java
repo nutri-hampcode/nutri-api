@@ -23,7 +23,10 @@ public class Meal {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "imageUrl", nullable = false)
+    private String imageUrl;
+
+    @Column(name = "description", columnDefinition="TEXT")
     private String description;
 
     @Column(name = "calories")

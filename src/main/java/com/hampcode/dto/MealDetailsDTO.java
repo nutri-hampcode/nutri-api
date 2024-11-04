@@ -5,7 +5,9 @@ import lombok.Data;
 
 @Data
 public class MealDetailsDTO {
+    private Integer id;
     private String name;
+    private String imageUrl;
     private String description;
     private Integer calories;
     private BigDecimal proteins;
