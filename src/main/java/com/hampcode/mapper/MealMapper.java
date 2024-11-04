@@ -17,7 +17,7 @@ public class MealMapper {
     public MealDetailsDTO toDetailsDTO(Meal meal) {
         MealDetailsDTO mealDetailsDTO = modelMapper.map(meal, MealDetailsDTO.class);
         mealDetailsDTO.setDietType(meal.getDietType().getType());
-        mealDetailsDTO.setImage(meal.getImage().getBytes());
+        mealDetailsDTO.setImage(meal.getImage());
         return mealDetailsDTO;
     }
 
