@@ -16,4 +16,7 @@ public class Doctor {
 
     @Column(name="lastName", nullable = false)
     private String lastName;
+
+    @Column(name = "doctor_img", nullable = false)
+    private String doctorImg;
 }

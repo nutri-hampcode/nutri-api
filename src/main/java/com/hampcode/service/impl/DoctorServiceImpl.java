@@ -59,7 +59,7 @@ public class DoctorServiceImpl implements DoctorService {
 
         docFromDb.setFirstName(doctorDTO.getFirstName());
         docFromDb.setLastName(doctorDTO.getLastName());
-
+        docFromDb.setDoctorImg(doctorDTO.getDoctorImg());
         doctorRepository.save(docFromDb);
 
         return doctorMapper.toDTO(docFromDb);

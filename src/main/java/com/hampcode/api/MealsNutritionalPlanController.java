@@ -63,7 +63,7 @@ public class MealsNutritionalPlanController {
         dto.setNutritionalPlan(plan.getNutritionalPlan().getType() + " ("
                 + plan.getNutritionalPlan().getDoctor().getFirstName()
                 + " " + plan.getNutritionalPlan().getDoctor().getLastName() + ")");
-
+        dto.setMealImg(plan.getMeal().getImage());
         return ResponseEntity.ok(dto);
     }
 
