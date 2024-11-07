@@ -61,7 +61,7 @@ public class MealServiceImpl implements MealService {
                 });
         Meal m = mealMapper.toEntity(mealCDTO);
         m.setDietType(dt);
-        m.setImage(m.getImage());
+        m.setImage(mealCDTO.getImage());
         return mealMapper.toDetailsDTO(mealRepo.save(m));
     }
 

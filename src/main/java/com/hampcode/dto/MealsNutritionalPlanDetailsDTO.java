@@ -8,4 +8,5 @@ public class MealsNutritionalPlanDetailsDTO {
     private String mealType;
     private String nutritionalPlan;
     private String meal;
+    private String mealImg;
 }

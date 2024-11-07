@@ -39,8 +39,10 @@ public class MealsNutritionalPlanServiceImpl implements MealsNutritionalPlanServ
 
         Meal meal = mealRepository.findById(planDto.getMealId())
                 .orElseThrow(() -> new ResourceNotFoundException("Meal not found with ID: " + planDto.getMealId()));
-        plan.setMeal(meal);
+        System.out.println("Meal image: " + meal.getImage());
 
+        plan.setMeal(meal);
+        plan.setMealImg(meal.getImage());
         return mealsNutritionalPlanRepository.save(plan);
     }
 

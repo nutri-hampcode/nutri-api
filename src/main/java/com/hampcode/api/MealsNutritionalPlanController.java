@@ -44,7 +44,7 @@ public class MealsNutritionalPlanController {
                     + " " + plan.getNutritionalPlan().getDoctor().getLastName() + ")");
 
             dto.setMeal(plan.getMeal().getName() + " (" + plan.getMeal().getDescription() + ")");
-
+            dto.setMealImg(plan.getMeal().getImage());
             return dto;
         }).toList();
 
