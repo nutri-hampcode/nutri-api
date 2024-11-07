@@ -16,9 +16,6 @@ public class MealCUDTO {
     @NotBlank(message = "Description of meal is mandatory")
     private String description;
 
-    @NotNull(message="ImageURL is mandatory")
-    private String imageUrl;
-
     @NotNull(message = "Calories of meal is mandatory")
     private Integer calories;
 
