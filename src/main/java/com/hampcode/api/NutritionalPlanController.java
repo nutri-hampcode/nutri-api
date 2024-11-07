@@ -80,20 +80,4 @@ public class NutritionalPlanController {
         nutritionalPlanService.deleteNutritionalPlan(id);
         return ResponseEntity.noContent().build();
     }
-
-    @GetMapping("/user/{userId}/plans")
-    public ResponseEntity<List<NutritionalPlanDetailsDTO>> getNutritionalPlansByUserId(@PathVariable Integer userId) {
-        List<NutritionalPlan> plans = nutritionalPlanService.findNutritionalPlansByUserId(userId);
-        List<NutritionalPlanDetailsDTO> result = plans.stream()
-            .map(plan -> {
-                NutritionalPlanDetailsDTO dto = new NutritionalPlanDetailsDTO();
-                dto.setId(plan.getId());
-                dto.setType(plan.getType());
-                dto.setDoctor(plan.getDoctor().getFirstName() + " (" + plan.getDoctor().getLastName() + ")");
-                dto.setUser(plan.getUser().getCustomer().getName() + " (" + plan.getUser().getCustomer().getUsername() + ")");
-                return dto;
-            })
-            .collect(Collectors.toList());
-        return ResponseEntity.ok(result);
-    }
 }

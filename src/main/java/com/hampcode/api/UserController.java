@@ -6,6 +6,8 @@ import com.hampcode.dto.AuthResponseDTO;
 import com.hampcode.dto.UserRegistrationDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +38,7 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-
-    @GetMapping("/{id}")
+    @GetMapping("/{id:\\d+}")
     public ResponseEntity<UserCUDTO> get(@PathVariable Integer id){
         UserCUDTO u = userService.getOne(id);
         return new ResponseEntity<>(u, HttpStatus.OK);

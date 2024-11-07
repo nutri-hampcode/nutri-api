@@ -36,7 +36,6 @@ public class UserMembershipMapper {
 
     public static UserMembershipDetailsDTO toDetailsDTO(UserMembership userMembership) {
         UserMembershipDetailsDTO dto = new UserMembershipDetailsDTO();
-        dto.setId(userMembership.getId());
         dto.setName(userMembership.getMembership().getName().name());
         dto.setStart_date(userMembership.getStart_date());
         dto.setEnd_date(userMembership.getEnd_date());

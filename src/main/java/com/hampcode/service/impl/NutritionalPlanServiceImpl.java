@@ -51,8 +51,4 @@ public class NutritionalPlanServiceImpl implements NutritionalPlanService {
         NutritionalPlan existingPlan = findNutritionalPlanById(id);
         nutritionalPlanRepository.delete(existingPlan);
     }
-    @Override
-    public List<NutritionalPlan> findNutritionalPlansByUserId(Integer userId) {
-        return nutritionalPlanRepository.findAllByUserId(userId);
-    }
 }

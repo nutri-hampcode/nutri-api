@@ -96,9 +96,7 @@ public class UserMembershipServiceImpl implements UserMembershipService {
         UserMembership userMembership = userMembershipRepository.findByUserId(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("UserMembership not found for User with id: " + userId));
 
-        // Eliminar completamente la membresía
-        userMembershipRepository.delete(userMembership);
-        userMembershipRepository.flush();
+        userMembership.setStatus(false);
         UserMembership savedUserMembership = userMembershipRepository.save(userMembership);
         return UserMembershipMapper.toDetailsDTO(savedUserMembership);
     }

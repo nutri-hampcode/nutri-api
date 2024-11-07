@@ -84,17 +84,5 @@ public class MealsNutritionalPlanServiceImpl implements MealsNutritionalPlanServ
                     .stream()
                     .map(MealsNutritionalPlan::getMeal)
                     .toList();
-    }
-
-    @Override
-    public List<MealsNutritionalPlan> findAllByNutritionalPlanId(Integer id) {
-        return mealsNutritionalPlanRepository.findAllByNutritionalPlanId(id);
-    }
-
-    @Override
-    public Meal findMealById(Integer id) {
-        return mealRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Meal not found with ID: " + id));
-    }
-
+    }    
 }

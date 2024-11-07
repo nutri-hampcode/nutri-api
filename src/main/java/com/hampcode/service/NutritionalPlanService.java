@@ -11,5 +11,4 @@ public interface NutritionalPlanService {
     NutritionalPlan findNutritionalPlanById(Integer id);
     NutritionalPlan updateNutritionalPlan(Integer id, NutritionalPlanDTO planDto);
     void deleteNutritionalPlan(Integer id);
-    List<NutritionalPlan> findNutritionalPlansByUserId(Integer userId);
 }

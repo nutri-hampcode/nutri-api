@@ -12,8 +12,6 @@ public interface MealsNutritionalPlanService {
     MealsNutritionalPlan findMealsNutritionalPlanById(Integer id);
     MealsNutritionalPlan updateMealsNutritionalPlan(Integer id, MealsNutritionalPlanDTO planDto);
     void deleteMealsNutritionalPlan(Integer id);
-    List<MealsNutritionalPlan> findAllByNutritionalPlanId(Integer id);
 
     public List<Meal> findMealsByNutritionalPlanId(Integer id);
-    Meal findMealById(Integer id);
 }

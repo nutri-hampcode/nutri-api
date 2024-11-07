@@ -1,6 +1,8 @@
 package com.hampcode.model.entity;
 
+
 import jakarta.persistence.*;
+
 import lombok.Data;
 
 @Data
@@ -24,4 +26,5 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="role_id", referencedColumnName = "id")
     private Role role;
+
 }

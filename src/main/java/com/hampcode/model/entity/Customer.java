@@ -31,12 +31,12 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     private Allergies allergies;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_goal", referencedColumnName = "id"
             ,foreignKey = @ForeignKey(name = "FK_id_goal"))
     private Goal goal;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_diet_type", referencedColumnName = "id"
             ,foreignKey = @ForeignKey(name = "FK_id_diet_types"))
     private DietType dietType;
