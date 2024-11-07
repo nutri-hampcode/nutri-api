@@ -30,4 +30,6 @@ public class MealCUDTO {
 
     @NotNull(message = "Fats of meal is mandatory")
     private BigDecimal fat;
+
+    private String image;
 }

@@ -14,4 +14,5 @@ public class MealDetailsDTO {
     private BigDecimal carbs;
     private BigDecimal fat;
     private String dietType;
+    private String image;
 }

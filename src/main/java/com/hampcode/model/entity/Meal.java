@@ -44,4 +44,7 @@ public class Meal {
     @ManyToOne
     @JoinColumn(name = "diet_type_id", referencedColumnName = "id")
     private DietType dietType;
+
+    @Column(name = "image")
+    private String image;
 }

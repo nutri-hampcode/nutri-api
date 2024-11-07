@@ -32,4 +32,7 @@ public class MealsNutritionalPlan {
     @ManyToOne
     @JoinColumn(name = "meal_id", referencedColumnName = "id", nullable = false)
     private Meal meal;
+
+    @Column(name = "image")
+    private String mealImg;
 }

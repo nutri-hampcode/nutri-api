@@ -20,4 +20,6 @@ public class MealsNutritionalPlanDTO {
 
     @NotNull(message = "Meal ID cannot be null")
     private Integer mealId;
+
+    private String mealImg;
 }
