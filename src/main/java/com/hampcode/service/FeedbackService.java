@@ -1,13 +1,12 @@
 package com.hampcode.service;
 
-import com.hampcode.model.entity.Feedback;
-import com.hampcode.dto.FeedbackDTO;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.hampcode.dto.FeedbackDTO;
+import com.hampcode.model.entity.Feedback;
 
 public interface FeedbackService {
     List<Feedback> getAllFeedbacks();
