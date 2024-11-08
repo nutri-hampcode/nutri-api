@@ -1,9 +1,10 @@
 package com.hampcode.repository;
 
-import com.hampcode.model.entity.Exercise;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.hampcode.model.entity.Exercise;
 
 public interface ExerciseRepository extends JpaRepository<Exercise, Integer> {
     List<Exercise> findByGoalId(Integer goalId);

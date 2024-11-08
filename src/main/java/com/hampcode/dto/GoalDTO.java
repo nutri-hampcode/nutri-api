@@ -1,6 +1,7 @@
 package com.hampcode.dto;
 
 import com.hampcode.model.entity.Goal.GoalType;
+
 import lombok.Data;
 
 @Data

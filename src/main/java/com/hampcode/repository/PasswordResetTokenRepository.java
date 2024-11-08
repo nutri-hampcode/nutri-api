@@ -1,9 +1,10 @@
 package com.hampcode.repository;
 
-import com.hampcode.model.entity.PasswordResetToken;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import com.hampcode.model.entity.PasswordResetToken;
 
 public interface PasswordResetTokenRepository extends JpaRepository<PasswordResetToken, Integer> {
     Optional<PasswordResetToken> findByToken(String token);

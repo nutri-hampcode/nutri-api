@@ -53,6 +53,7 @@ public class MealServiceImpl implements MealService {
     @Transactional
     @Override
     public MealDetailsDTO create(Integer id_diettype, MealCUDTO mealCDTO) {
+        System.out.println("QUIERO POLLOOOOOOOO");
         DietType dt = dietTypeRepository.findById(id_diettype).orElseThrow(()-> new ResourceNotFoundException("Diet Type not found with id: " + id_diettype));
         mealRepo.findMealByNameAndDietTypeId(mealCDTO.getName(), dt.getId())
                 .ifPresent(existingMeal -> {
@@ -60,6 +61,7 @@ public class MealServiceImpl implements MealService {
                 });
         Meal m = mealMapper.toEntity(mealCDTO);
         m.setDietType(dt);
+        m.setImage(mealCDTO.getImage());
         return mealMapper.toDetailsDTO(mealRepo.save(m));
     }
 
@@ -75,6 +77,7 @@ public class MealServiceImpl implements MealService {
         m.setCarbs(mealUDTO.getCarbs());
         m.setProteins(mealUDTO.getProteins());
         m.setFat(mealUDTO.getFat());
+        m.setImage(m.getImage());
 
         return mealMapper.toDetailsDTO(mealRepo.save(m));
     }

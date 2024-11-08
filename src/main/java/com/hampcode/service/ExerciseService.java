@@ -1,13 +1,13 @@
 package com.hampcode.service;
 
-import com.hampcode.dto.ExerciseDTO;
-import com.hampcode.dto.TipDTO;
-import com.hampcode.model.entity.Exercise;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import com.hampcode.dto.ExerciseDTO;
+import com.hampcode.dto.TipDTO;
+import com.hampcode.model.entity.Exercise;
 
 public interface ExerciseService {
     List<Exercise> getAllExercises();
