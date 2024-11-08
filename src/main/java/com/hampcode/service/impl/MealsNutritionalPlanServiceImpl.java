@@ -96,7 +96,7 @@ public class MealsNutritionalPlanServiceImpl implements MealsNutritionalPlanServ
     @Override
     public Meal findMealById(Integer id) {
         return mealRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Meal not found with ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Meal not found with ID: " + id));
     }
 
 }
