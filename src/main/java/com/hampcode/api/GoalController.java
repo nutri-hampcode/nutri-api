@@ -2,6 +2,7 @@ package com.hampcode.api;
 
 import java.util.List;
 
+import com.hampcode.dto.GoalDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +25,8 @@ public class GoalController {
     private final GoalService goalService;
 
     @GetMapping
-    public ResponseEntity<List<Goal>> list() {
-        List<Goal> goals = goalService.findAll();
-        return new ResponseEntity<>(goals, HttpStatus.OK);
+    public ResponseEntity<List<GoalDTO>> listGoalDTO() {
+        return ResponseEntity.ok(goalService.getAllGoalsDTO());
     }
 
     @GetMapping("/{id}")

@@ -19,7 +19,7 @@ public class Exercise {
     private String linkVideo;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;

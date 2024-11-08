@@ -31,9 +31,13 @@ public class UserMapper {
             userCUDTO.setHeight(user.getCustomer().getHeight());
             userCUDTO.setWeight(user.getCustomer().getWeight());
             userCUDTO.setAge(user.getCustomer().getAge());
-            if(user.getCustomer().getDietType()!=null) {
-                userCUDTO.setDietTypeId(user.getCustomer().getDietType().getId());
-            }
+            userCUDTO.setAllergies(user.getCustomer().getAllergies());
+        }
+        if (user.getCustomer().getGoal() != null) {
+            userCUDTO.setGoalId(user.getCustomer().getGoal().getId());  // Mapeo de Goal ID
+        }
+        if (user.getCustomer().getDietType() != null) {
+            userCUDTO.setDietTypeId(user.getCustomer().getDietType().getId());  // Mapeo de DietType ID
         }
         return userCUDTO;
     }

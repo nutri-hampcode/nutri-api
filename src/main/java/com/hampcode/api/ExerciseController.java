@@ -22,11 +22,6 @@ public class ExerciseController {
     private final ExerciseService exerciseService;
 
     @GetMapping
-    public ResponseEntity<List<Exercise>> listExercises() {
-        return ResponseEntity.ok(exerciseService.getAllExercises());
-    }
-
-    @GetMapping("/DTO")
     public ResponseEntity<List<ExerciseDTO>> listExercisesDTO() {
         return ResponseEntity.ok(exerciseService.getAllExercisesDTO());
     }
@@ -37,6 +32,7 @@ public class ExerciseController {
         Page<Exercise> exercises = exerciseService.paginate(pageable);
         return new ResponseEntity<Page<Exercise>>(exercises, HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Exercise> getExerciseById(@PathVariable("id") Integer id) {
         Exercise exercise = exerciseService.findById(id);
