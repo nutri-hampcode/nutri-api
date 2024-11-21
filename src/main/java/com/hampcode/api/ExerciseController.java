@@ -34,10 +34,13 @@ public class ExerciseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Exercise> getExerciseById(@PathVariable("id") Integer id) {
+    public ResponseEntity<ExerciseDTO> getExerciseById(@PathVariable("id") Integer id) {
         Exercise exercise = exerciseService.findById(id);
-        return new ResponseEntity<Exercise>(exercise, HttpStatus.OK);
+        ExerciseDTO exerciseDTO = exerciseService.convertToDTO(exercise);
+        return new ResponseEntity<>(exerciseDTO, HttpStatus.OK);
     }
+
+
     @GetMapping("/goal/{goalId}")
     public ResponseEntity<List<ExerciseDTO>> getExercisesByGoalId(@PathVariable Integer goalId) {
         List<ExerciseDTO> exercises = exerciseService.getExercisesByGoalId(goalId);
